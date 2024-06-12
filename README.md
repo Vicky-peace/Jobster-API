@@ -36,5 +36,5 @@ Jobster is a job application management dashboard that allows users to manage jo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/jobster.git
+   git clone https://github.com/Vicky-peace/Jobster-API
    cd jobster
