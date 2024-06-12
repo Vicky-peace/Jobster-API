@@ -2,7 +2,7 @@
 
 Jobster is a job application management dashboard that allows users to manage job applications, schedule interviews, and track application statuses.
 
-![Jobster Dashboard](./path/to/image.png) <!-- Adjust the path accordingly -->
+![Jobster Dashboard](./img/Screenshot%202024-06-12%20214040.png) <!-- Adjust the path accordingly -->
 
 ## Table of Contents
 
@@ -36,5 +36,5 @@ Jobster is a job application management dashboard that allows users to manage jo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/jobster.git
+   git clone https://github.com/Vicky-peace/Jobster-API
    cd jobster
