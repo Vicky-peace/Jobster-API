@@ -7,6 +7,16 @@ import { eq } from 'drizzle-orm';
 import { Context } from 'hono';
 
 
+interface LoginResponse {
+    token: string;
+    user: {
+        id: number;
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: string;
+    };
+}
 const secret = process.env.SECRET;
 const expiresIn = process.env.EXPIRESIN;
 
@@ -43,7 +53,7 @@ return 'User registered successfully';
 };
 
 
-export const loginUserService = async (email: string, password: string) => {
+export const loginUserService = async (email: string, password: string): Promise<LoginResponse>  => {
 //validate input
 loginSchema.parse({email, password});
 try {
@@ -63,6 +73,7 @@ try {
     return {token, user};
 } catch (error:any) {
     console.log('Error in loginUserService', error);
+    throw new Error(error.message);
 }
 
 }
