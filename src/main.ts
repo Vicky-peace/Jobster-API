@@ -6,6 +6,7 @@ import { jobRouter } from "./jobs/jobs.router";
 
 //routes
 import { authRouter } from './auth/auth.router';
+import { userRouter } from "./users/user.route";
 const app = new Hono();
 
 
@@ -18,6 +19,7 @@ app.route('/', jobRouter)
 
 
 app.route('/', authRouter )
+app.route('/', userRouter)
 
 
 serve({
