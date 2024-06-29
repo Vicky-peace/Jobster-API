@@ -22,7 +22,7 @@ export const Jobs = pgTable('jobs', {
     user_id: integer("user_id").references(() => Users.id, { onDelete: "cascade" }),
     position: varchar("position", { length: 255 }).notNull(),
     company: varchar("company", { length: 255 }).notNull(),
-    job_location: varchar("location", { length: 255 }).notNull(),
+    location: varchar("location", { length: 255 }).notNull(),
     status: ApplicationStatus("status").default("pending"),
     job_type: JobType("job_type").default("full-time")
 });

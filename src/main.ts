@@ -3,7 +3,8 @@ import "dotenv/config";
 import { Context } from "hono";
 import {serve} from '@hono/node-server';
 
-
+//routes
+import { authRouter } from './auth/auth.router';
 const app = new Hono();
 
 
@@ -11,6 +12,8 @@ app.get("/", async (c) => {
    c.text("Hello World");
 });
 
+
+app.route('/', authRouter )
 
 serve({
     fetch: app.fetch,

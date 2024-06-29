@@ -9,6 +9,12 @@ export const UserSchema = z.object({
     password: z.string().max(255, "Password must be at most 255 characters long")
 });
 
+export const loginSchema = z.object({
+    email: z.string().email().max(255),
+    password: z.string().max(255)
+})
+
+
 // Enum for ApplicationStatus
 export const ApplicationStatus = z.enum(["pending", "scheduled", "declined", "interviewed"]);
 
