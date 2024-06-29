@@ -12,8 +12,7 @@ export const UserSchema = z.object({
 export const loginSchema = z.object({
     email: z.string().email().max(255),
     password: z.string().max(255)
-})
-
+});
 
 // Enum for ApplicationStatus
 export const ApplicationStatus = z.enum(["pending", "scheduled", "declined", "interviewed"]);
@@ -27,9 +26,9 @@ export const JobSchema = z.object({
     user_id: z.number(), // Reference to Users ID
     position: z.string().max(255, "Position must be at most 255 characters long"),
     company: z.string().max(255, "Company must be at most 255 characters long"),
-    job_location: z.string().max(255, "Job location must be at most 255 characters long"),
+    location: z.string().max(255, "Job location must be at most 255 characters long"),
     status: ApplicationStatus,
-    job_type: JobType
+    job_type: JobType.optional()
 });
 
 // Example usage of the UserSchema for validation

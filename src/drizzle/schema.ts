@@ -24,15 +24,12 @@ export const Jobs = pgTable('jobs', {
     company: varchar("company", { length: 255 }).notNull(),
     location: varchar("location", { length: 255 }).notNull(),
     status: ApplicationStatus("status").default("pending"),
-
     job_type: JobType("job_type").default("full-time"),
-   
-
 });
 
 // User Relationships
 export const userRelations = relations(Users, ({ many }) => ({
-jobs: many(Jobs),   
+    jobs: many(Jobs),   
 }));
 
 // Job Relationships
