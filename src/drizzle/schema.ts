@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, serial, varchar, text, integer, timestamp, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, integer, timestamp, pgEnum } from "drizzle-orm/pg-core";
 
 // User Table
 export const Users = pgTable('users', {
@@ -7,10 +7,7 @@ export const Users = pgTable('users', {
     firstName: varchar("first_name", { length: 255 }).notNull(),
     lastName: varchar("last_name", { length: 255 }).notNull(),
     email: varchar("email", { length: 255 }).notNull(),
-    // location: varchar("location", { length: 255 }),
     password: varchar("password", { length: 255 }).notNull(),
-    // created_at: timestamp("created_at").defaultNow(),
-    // updated_at: timestamp("updated_at").defaultNow(),
 });
 
 // ApplicationStatus Enum
@@ -27,23 +24,23 @@ export const Jobs = pgTable('jobs', {
     company: varchar("company", { length: 255 }).notNull(),
     location: varchar("location", { length: 255 }).notNull(),
     status: ApplicationStatus("status").default("pending"),
+
     job_type: JobType("job_type").default("full-time"),
    
+
 });
 
-/////////////////////////////// Relationships ///////////////////////////////
-
 // User Relationships
-export const userRelations = relations(Users, ({ one}) => ({
-    jobs: one(Jobs, {
-        fields: [Users.id],
-        references: [Jobs.user_id]
-    })
+export const userRelations = relations(Users, ({ many }) => ({
+jobs: many(Jobs),   
 }));
 
 // Job Relationships
-export const jobRelations = relations(Jobs, ({ many}) => ({
-    user: many(Jobs)
+export const jobRelations = relations(Jobs, ({ one }) => ({
+    user: one(Users, {
+        fields: [Jobs.user_id],
+        references: [Users.id]
+    })
 }));
 
 /////////////////////////////// Types ///////////////////////////////

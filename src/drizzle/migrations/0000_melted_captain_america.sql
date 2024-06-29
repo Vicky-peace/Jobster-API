@@ -17,9 +17,7 @@ CREATE TABLE IF NOT EXISTS "jobs" (
 	"company" varchar(255) NOT NULL,
 	"location" varchar(255) NOT NULL,
 	"status" "application_status" DEFAULT 'pending',
-	"job_type" "job_type" DEFAULT 'full-time',
-	"created_at" timestamp DEFAULT now(),
-	"updated_at" timestamp DEFAULT now()
+	"job_type" "job_type" DEFAULT 'full-time'
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
