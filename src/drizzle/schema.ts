@@ -24,7 +24,10 @@ export const Jobs = pgTable('jobs', {
     company: varchar("company", { length: 255 }).notNull(),
     location: varchar("location", { length: 255 }).notNull(),
     status: ApplicationStatus("status").default("pending"),
-    job_type: JobType("job_type").default("full-time")
+
+    job_type: JobType("job_type").default("full-time"),
+   
+
 });
 
 // User Relationships

@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import "dotenv/config";
 import { Context } from "hono";
 import {serve} from '@hono/node-server';
+import { jobRouter } from "./jobs/jobs.router";
 
 //routes
 import { authRouter } from './auth/auth.router';
@@ -13,7 +14,11 @@ app.get("/", async (c) => {
 });
 
 
+app.route('/', jobRouter)
+
+
 app.route('/', authRouter )
+
 
 serve({
     fetch: app.fetch,
