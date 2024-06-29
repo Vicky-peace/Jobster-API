@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { registerUserService } from "./auth.service";
+import { registerUserService,loginUserService } from "./auth.service";
 
 export const registerUser = async (c: Context) => {
     try {
@@ -11,3 +11,12 @@ export const registerUser = async (c: Context) => {
     }
 }
 
+export const loginUser = async (c: Context) => {
+    try {
+        const {email, password} = await c.req.json();
+        const {token, user} = await loginUserService(email, password);
+        return c.json({token, user}, 200);
+    } catch (error: any){
+        return c.json({error: error.message}, 400);
+    }
+}
