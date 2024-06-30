@@ -19,3 +19,12 @@ export const getUserService = async (id: number): Promise<TSUser | undefined> =>
     })
 }
 
+export const updateUserService = async (id: number, user: TIUser) => {
+    await db.update(Users).set(user).where(eq(Users.id, id)).execute();
+    return "User updated successfully"
+}
+
+export const deleteUserService = async (id: number) => {
+    await db.delete(Users).where(eq(Users.id, id));
+    return "User deleted successfully"
+}

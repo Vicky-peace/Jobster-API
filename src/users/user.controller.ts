@@ -1,5 +1,7 @@
 import { Context } from "hono";
-import {userService} from './user.service';
+import {userService,getUserService,updateUserService,deleteUserService} from './user.service';
+import { resolve } from "dns/promises";
+
 
 export const listUsers = async (c: Context) =>{
     try {
@@ -10,6 +12,59 @@ if(data == null || data.length == 0) {
     return c.text('User not found', 404)
 }
 return c.json(data, 200)
+    } catch (error: any) {
+        return c.json({error: error.message}, 500)
+    }
+}
+
+export const getUser = async (c: Context) =>{
+    try {
+        const id = parseInt(c.req.param('id'));
+        if(isNaN(id)) return c.text('Invalid id', 400);
+
+        const user = await getUserService(id);
+        if(user == undefined) {
+            return c.text('User not found', 404)
+        }
+        return c.json(user, 200);
+    } catch (error: any) {
+        return c.json({error: error.message}, 500)
+    }
+}
+
+export const updateUser = async (c: Context) =>{
+    
+        const id = parseInt(c.req.param('id'));
+        if(isNaN(id)) return c.text('Invalid id', 400);
+
+        const user = await c.req.json();
+        try{
+       const res = await updateUserService(id, user);
+
+       if(!res){
+              return c.text('User not updated', 404)
+       }
+       return c.json({msg: res}, 200);
+    } catch (error: any) {
+        return c.json({error: error.message}, 500)
+    }
+}
+
+export const deleteUser = async (c: Context) =>{
+    const id = Number(c.req.param('id'));   
+    if(isNaN(id)) return c.text('Invalid id', 400);
+    try {
+        const searchUser = await getUserService(id);
+        if(searchUser == undefined){
+            return c.text('User not found', 404)
+        }
+
+        ///delete user
+        const res = await deleteUserService(id);
+        if(!res){
+            return c.text('User not deleted', 404)
+        }
+        return c.json({msg: res}, 200);
     } catch (error: any) {
         return c.json({error: error.message}, 500)
     }
