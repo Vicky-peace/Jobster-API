@@ -3,43 +3,59 @@ import "dotenv/config";
 import { serve } from '@hono/node-server';
 import { html } from 'hono/html';
 import { jobRouter } from "./jobs/jobs.router";
+import { Context } from "hono";
 
 //routes
 import { authRouter } from './auth/auth.router';
 import { userRouter } from "./users/user.route";
+
 const app = new Hono();
 
-app.get("/", async (c) => {
-   const htmlContent = html`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>Applify API</title>
-         <style>
-            body {
-               font-family: Arial, sans-serif;
-               text-align: center;
-               margin: 50px;
+app.get('/', (c: Context) => {    
+    return c.html(
+        html`
+        <style>
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                text-align: center;
+                border: 1px solid #ddd;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            li {
+                margin-bottom: 10px;
             }
             a {
-               display: block;
-               margin: 10px 0;
-               color: blue;
-               text-decoration: none;
+                color: #007BFF;
+                text-decoration: none;
             }
-         </style>
-      </head>
-      <body>
-         <h1>Welcome to Applify API</h1>
-         <p>You can fetch the following resources:</p>
-         <a href="/users">Fetch Users</a>
-         <a href="/jobs">Fetch Jobs</a>
-      </body>
-      </html>
-   `;
-   c.html(htmlContent);
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+        <div class="container">
+            <h1>Welcome to the Applify API</h1>
+            <ul>
+                <li><b>Authors:</b> Charity Jelimo && Victor Peace</li>
+                <li><b>Description:</b> This is a simple API for an application to track job applications</li>
+                <li><b>GitHub:</b> <a href="https://github.com/jelimo-charity/Jobster-Api">GitHub link</a></li>
+               
+            </ul>
+        </div>
+        `
+    );
 });
 
 app.route('/jobs', jobRouter);
