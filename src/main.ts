@@ -58,9 +58,9 @@ app.get('/', (c: Context) => {
     );
 });
 
-app.route('/jobs', jobRouter);
-app.route('/auth', authRouter);
-app.route('/users', userRouter);
+app.route('/', jobRouter);
+app.route('/', authRouter);
+app.route('/', userRouter);
 
 serve({
     fetch: app.fetch,
