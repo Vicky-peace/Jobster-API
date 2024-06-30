@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { createJob, deleteJob, getJob, getJobs } from "./jobs.controller";
+import { createJob, deleteJob, getJob, getJobs, updateJob } from "./jobs.controller";
 import { zValidator } from "@hono/zod-validator";
 import { JobSchema } from "../validator";
 
@@ -13,4 +13,5 @@ jobRouter.post("/jobs", zValidator("json", JobSchema, (result, c) => {
         return c.json(result.error, 400);
     }
 }), createJob);
+jobRouter.put('/jobs/:id', updateJob)
 jobRouter.delete("/jobs/:id", deleteJob)
