@@ -1,12 +1,13 @@
 import { Hono } from "hono";
 import "dotenv/config";
-import { Context } from "hono";
-import {serve} from '@hono/node-server';
+import { serve } from '@hono/node-server';
+import { html } from 'hono/html';
 import { jobRouter } from "./jobs/jobs.router";
 import {cors} from 'hono/cors'
 //routes
 import { authRouter } from './auth/auth.router';
 import { userRouter } from "./users/user.route";
+
 const app = new Hono();
 
 
