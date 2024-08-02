@@ -14,7 +14,7 @@ const app = new Hono();
 app.use("*", cors())
 
 app.get("/", async (c) => {
-   c.text("Hello World");
+   return c.json({message: "Hello World"});
 });
 app.route('/', jobRouter)
 
